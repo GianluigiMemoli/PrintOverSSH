@@ -20,7 +20,11 @@ ssh -tt $HOSTNAME@$SERVERADDR << ENDREMOTESCRIPT
     cd print 
     for file in *
     do
-        lp "$file"
+        if [ "$file" != *".pdf" ]
+        then
+            unoconv "$file"
+        fi
+        lp *".pdf"
     done  
     rm *
     logout 
